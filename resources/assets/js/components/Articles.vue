@@ -30,43 +30,33 @@
           </ul>
         </nav>
         <div class="row ">
-<div class="col-lg-2">
-
-
-          <div class="">
-            <ul class="nav flex-column">
-              <li class="nav-item">
-                <a class="nav-link active" href="#">Active</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
-              </li>
-            </ul>
-          </div>
-          </div>
 
 
 
-          <div class="col-lg-9">
-          <div class=" col-lg-4 card card-body mb-1"
+
+
+          <div class=" col-lg-6 card card-body "
             v-for="article in articles"
             v-bind:key="article.id"
           >
-            <h3>{{ article.title }}</h3>
+            <h3> <img height="50" width="50" src="https://img.pngio.com/articles-icon-png-310555-free-icons-library-article-png-200_200.jpg">
+         <a href=""> {{ article.title }}</a>  </h3>
             <p>{{ article.body }}</p>
-            <hr />
+             <hr />
             <button @click="editArticle(article)" class="btn btn-warning mb-2">Edit</button>
             <button @click="deleteArticle(article.id)" class="btn btn-danger">Delete</button>
           </div>
           </div>
+
+
+
+
+
+
         </div>
-      </div>
+
+
+
     </template>
 
     <script>
@@ -81,7 +71,8 @@
           },
           article_id: "",
           pagination: {},
-          edit: false
+          edit: false,
+          isHidden:true
         };
       },
       created() {

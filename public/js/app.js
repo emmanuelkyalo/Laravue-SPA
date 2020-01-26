@@ -44744,16 +44744,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -44766,7 +44756,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       },
       article_id: "",
       pagination: {},
-      edit: false
+      edit: false,
+      isHidden: true
     };
   },
   created: function created() {
@@ -45026,94 +45017,66 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "row " }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "col-lg-9" },
-        _vm._l(_vm.articles, function(article) {
-          return _c(
-            "div",
-            { key: article.id, staticClass: " col-lg-4 card card-body mb-1" },
-            [
-              _c("h3", [_vm._v(_vm._s(article.title))]),
+    _c(
+      "div",
+      { staticClass: "row " },
+      _vm._l(_vm.articles, function(article) {
+        return _c(
+          "div",
+          { key: article.id, staticClass: " col-lg-6 card card-body " },
+          [
+            _c("h3", [
+              _c("img", {
+                attrs: {
+                  height: "50",
+                  width: "50",
+                  src:
+                    "https://img.pngio.com/articles-icon-png-310555-free-icons-library-article-png-200_200.jpg"
+                }
+              }),
               _vm._v(" "),
-              _c("p", [_vm._v(_vm._s(article.body))]),
-              _vm._v(" "),
-              _c("hr"),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-warning mb-2",
-                  on: {
-                    click: function($event) {
-                      return _vm.editArticle(article)
-                    }
+              _c("a", { attrs: { href: "" } }, [
+                _vm._v(" " + _vm._s(article.title))
+              ])
+            ]),
+            _vm._v(" "),
+            _c("p", [_vm._v(_vm._s(article.body))]),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-warning mb-2",
+                on: {
+                  click: function($event) {
+                    return _vm.editArticle(article)
                   }
-                },
-                [_vm._v("Edit")]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-danger",
-                  on: {
-                    click: function($event) {
-                      return _vm.deleteArticle(article.id)
-                    }
+                }
+              },
+              [_vm._v("Edit")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-danger",
+                on: {
+                  click: function($event) {
+                    return _vm.deleteArticle(article.id)
                   }
-                },
-                [_vm._v("Delete")]
-              )
-            ]
-          )
-        }),
-        0
-      )
-    ])
+                }
+              },
+              [_vm._v("Delete")]
+            )
+          ]
+        )
+      }),
+      0
+    )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-2" }, [
-      _c("div", {}, [
-        _c("ul", { staticClass: "nav flex-column" }, [
-          _c("li", { staticClass: "nav-item" }, [
-            _c("a", { staticClass: "nav-link active", attrs: { href: "#" } }, [
-              _vm._v("Active")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "nav-item" }, [
-            _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-              _vm._v("Link")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "nav-item" }, [
-            _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-              _vm._v("Link")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "nav-item" }, [
-            _c(
-              "a",
-              { staticClass: "nav-link disabled", attrs: { href: "#" } },
-              [_vm._v("Disabled")]
-            )
-          ])
-        ])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
