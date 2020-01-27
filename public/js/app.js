@@ -44860,34 +44860,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       articles: [],
+      images: ["https://cdn4.iconfinder.com/data/icons/seo-and-development/155/vector_257_04-01-128.png", "https://cdn4.iconfinder.com/data/icons/seo-and-development/155/vector_257_06-01-128.png", "https://cdn4.iconfinder.com/data/icons/seo-and-development/155/vector_257_04-01-512.png"],
       article: {
         id: "",
         title: "",
-        body: ""
+        body: "",
+        imageURL: ""
       },
       article_id: "",
+      singleArticle: {
+        id: "",
+        title: "",
+        body: "",
+        imageURL: ""
+      },
       pagination: {},
       edit: false,
-      hide: false,
-      message: 'Show Form'
 
+      oneArticle: false,
+      hide: false,
+      message: "Show Form",
+      image: "https://cdn4.iconfinder.com/data/icons/seo-and-development/155/vector_257_04-01-512.png"
     };
   },
   created: function created() {
@@ -44899,6 +44897,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this = this;
 
       var vm = this;
+      vm.image = vm.images[Math.floor(Math.random() * vm.images.length)];
+
       page_url = page_url || "/api/articles";
       fetch(page_url).then(function (res) {
         return res.json();
@@ -44918,8 +44918,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       };
       this.pagination = pagination;
     },
-    deleteArticle: function deleteArticle(id) {
+    showArticle: function showArticle(id) {
       var _this2 = this;
+
+      this.oneArticle = true;
+      fetch("api/article/" + id, {}).then(function (res) {
+        return res.json();
+      }).then(function (res) {
+        _this2.singleArticle = res.data;
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    },
+    deleteArticle: function deleteArticle(id) {
+      var _this3 = this;
 
       if (confirm("Are You Sure?")) {
         fetch("api/article/" + id, {
@@ -44928,14 +44940,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           return res.json();
         }).then(function (data) {
           alert("Article Removed");
-          _this2.fetchArticles();
+          _this3.fetchArticles();
         }).catch(function (err) {
           return console.log(err);
         });
       }
     },
     addArticle: function addArticle() {
-      var _this3 = this;
+      var _this4 = this;
 
       if (this.edit === false) {
         // Add
@@ -44948,9 +44960,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }).then(function (res) {
           return res.json();
         }).then(function (data) {
-          _this3.clearForm();
+          _this4.clearForm();
           alert("Article Added");
-          _this3.fetchArticles();
+          _this4.fetchArticles();
         }).catch(function (err) {
           return console.log(err);
         });
@@ -44965,9 +44977,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }).then(function (res) {
           return res.json();
         }).then(function (data) {
-          _this3.clearForm();
+          _this4.clearForm();
           alert("Article Updated");
-          _this3.fetchArticles();
+          _this4.fetchArticles();
         }).catch(function (err) {
           return console.log(err);
         });
@@ -44975,10 +44987,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     unhideForm: function unhideForm() {
       this.hide = !this.hide;
-      if (this.message === 'Hide Form') {
-        this.message = 'Show Form';
+      if (this.message === "Hide Form") {
+        this.message = "Show Form";
       } else {
-        this.message = 'Hide Form';
+        this.message = "Hide Form";
       }
     },
     editArticle: function editArticle(article) {
@@ -44988,7 +45000,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.article.title = article.title;
       this.article.body = article.body;
       this.hide = true;
-      this.message = 'Hide Form';
+      this.message = "Hide Form";
     },
     clearForm: function clearForm() {
       this.edit = false;
@@ -45183,27 +45195,20 @@ var render = function() {
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "row " },
+      { staticClass: "row" },
       _vm._l(_vm.articles, function(article) {
         return _c(
           "div",
-          { key: article.id, staticClass: " col-lg-4 card card-body mb-2 " },
+          { key: article.id, staticClass: "col-lg-4 card card-body mb-2" },
           [
             _c("h5", [
               _c("img", {
-                attrs: {
-                  height: "50",
-                  width: "50",
-                  src:
-                    "https://img.pngio.com/articles-icon-png-310555-free-icons-library-article-png-200_200.jpg"
-                }
+                attrs: { height: "50", width: "50", src: _vm.image }
               }),
-              _vm._v("\n        " + _vm._s(article.title) + "  ")
+              _vm._v("\n        " + _vm._s(article.title) + "\n      ")
             ]),
             _vm._v(" "),
             _c("p", [_vm._v(_vm._s(article.body))]),
-            _vm._v(" "),
-            _vm._m(0, true),
             _vm._v(" "),
             _c("hr"),
             _vm._v(" "),
@@ -45239,16 +45244,7 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", [
-      _c("button", { staticClass: "btn btn-sm btn-info" }, [_vm._v("Read")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
