@@ -18,11 +18,7 @@
         <!-- Styles -->
 
         <style>
-            .col-lg-6{
-                width:45%;
-                margin:0 2.5%;
-                margin-bottom: 1
-            }
+            
             h3{
                 text-align: right;
                 white-space: nowrap;
