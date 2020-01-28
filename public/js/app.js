@@ -44853,13 +44853,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -44893,6 +44886,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   methods: {
+    scrollToTop: function scrollToTop() {
+      window.scrollTo(0, 0);
+    },
     fetchArticles: function fetchArticles(page_url) {
       var _this = this;
 
@@ -45001,6 +44997,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.article.body = article.body;
       this.hide = true;
       this.message = "Hide Form";
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     },
     clearForm: function clearForm() {
       this.edit = false;
@@ -45021,8 +45019,6 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("h2", [_vm._v("Laravue")]),
-    _vm._v(" "),
     _vm.hide
       ? _c(
           "form",
@@ -45115,7 +45111,7 @@ var render = function() {
       _c(
         "button",
         {
-          staticClass: "btn btn-danger btn-block",
+          staticClass: "btn btn-info btn-block",
           on: {
             click: function($event) {
               return _vm.unhideForm()
@@ -45128,78 +45124,80 @@ var render = function() {
     _vm._v(" "),
     _c("h3", { staticClass: "mx-3 my-3 text-center" }, [_vm._v("My Articles")]),
     _vm._v(" "),
-    _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
-      _c("ul", { staticClass: "pagination" }, [
-        _c(
-          "li",
-          {
-            staticClass: "page-item",
-            class: [{ disabled: !_vm.pagination.prev_page_url }]
-          },
-          [
+    _c("div", { staticClass: "offset-3" }, [
+      _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
+        _c("ul", { staticClass: "pagination" }, [
+          _c(
+            "li",
+            {
+              staticClass: "page-item",
+              class: [{ disabled: !_vm.pagination.prev_page_url }]
+            },
+            [
+              _c(
+                "a",
+                {
+                  staticClass: "page-link",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      return _vm.fetchArticles(_vm.pagination.prev_page_url)
+                    }
+                  }
+                },
+                [_vm._v("Previous")]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c("li", { staticClass: "page-item disabled" }, [
             _c(
               "a",
-              {
-                staticClass: "page-link",
-                attrs: { href: "#" },
-                on: {
-                  click: function($event) {
-                    return _vm.fetchArticles(_vm.pagination.prev_page_url)
-                  }
-                }
-              },
-              [_vm._v("Previous")]
+              { staticClass: "page-link text-dark", attrs: { href: "#" } },
+              [
+                _vm._v(
+                  "Page " +
+                    _vm._s(_vm.pagination.current_page) +
+                    " of " +
+                    _vm._s(_vm.pagination.last_page)
+                )
+              ]
             )
-          ]
-        ),
-        _vm._v(" "),
-        _c("li", { staticClass: "page-item disabled" }, [
+          ]),
+          _vm._v(" "),
           _c(
-            "a",
-            { staticClass: "page-link text-dark", attrs: { href: "#" } },
+            "li",
+            {
+              staticClass: "page-item",
+              class: [{ disabled: !_vm.pagination.next_page_url }]
+            },
             [
-              _vm._v(
-                "Page " +
-                  _vm._s(_vm.pagination.current_page) +
-                  " of " +
-                  _vm._s(_vm.pagination.last_page)
+              _c(
+                "a",
+                {
+                  staticClass: "page-link",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      return _vm.fetchArticles(_vm.pagination.next_page_url)
+                    }
+                  }
+                },
+                [_vm._v("Next")]
               )
             ]
           )
-        ]),
-        _vm._v(" "),
-        _c(
-          "li",
-          {
-            staticClass: "page-item",
-            class: [{ disabled: !_vm.pagination.next_page_url }]
-          },
-          [
-            _c(
-              "a",
-              {
-                staticClass: "page-link",
-                attrs: { href: "#" },
-                on: {
-                  click: function($event) {
-                    return _vm.fetchArticles(_vm.pagination.next_page_url)
-                  }
-                }
-              },
-              [_vm._v("Next")]
-            )
-          ]
-        )
+        ])
       ])
     ]),
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "row" },
+      { staticClass: "row  offset-lg-3" },
       _vm._l(_vm.articles, function(article) {
         return _c(
           "div",
-          { key: article.id, staticClass: "col-lg-4 card card-body mb-2" },
+          { key: article.id, staticClass: "col-lg-3 card card-body mb-2 " },
           [
             _c("h5", [
               _c("img", {
@@ -45322,7 +45320,14 @@ var staticRenderFns = [
       [
         _c("div", { staticClass: "container" }, [
           _c("a", { staticClass: "navbar-brand", attrs: { href: "#" } }, [
-            _vm._v("Laravue")
+            _c("img", {
+              attrs: {
+                height: "50",
+                src:
+                  "https://cdn4.iconfinder.com/data/icons/seo-and-development/155/vector_257_04-01-512.png"
+              }
+            }),
+            _c("span", [_vm._v("Laravue")])
           ])
         ])
       ]

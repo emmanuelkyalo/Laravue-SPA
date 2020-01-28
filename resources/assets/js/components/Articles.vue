@@ -1,6 +1,5 @@
                   <template>
   <div>
-    <h2>Laravue</h2>
     <form @submit.prevent="addArticle" class="mb-5" v-if="hide">
       <div class="form-group">
         <input type="text" class="form-control" placeholder="Title" v-model="article.title" />
@@ -14,11 +13,11 @@
       </div>
     </form>
     <div class="mx-1 my-1">
-      <button @click="unhideForm()" class="btn btn-danger btn-block">{{ this.message }}</button>
+      <button @click="unhideForm()" class="btn btn-info btn-block">{{ this.message }}</button>
     </div>
 
     <h3 class="mx-3 my-3 text-center">My Articles</h3>
-    <nav aria-label="Page navigation example">
+    <div class="offset-3"><nav aria-label="Page navigation example" >
       <ul class="pagination">
         <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="page-item">
           <a class="page-link" href="#" @click="fetchArticles(pagination.prev_page_url)">Previous</a>
@@ -35,15 +34,11 @@
           <a class="page-link" href="#" @click="fetchArticles(pagination.next_page_url)">Next</a>
         </li>
       </ul>
-    </nav>
+    </nav></div>
 
 
-
-
-
-
-    <div class="row">
-      <div class="col-lg-4 card card-body mb-2" v-for="article in articles" v-bind:key="article.id">
+    <div class="row  offset-lg-3">
+      <div class="col-lg-3 card card-body mb-2 " v-for="article in articles" v-bind:key="article.id">
         <h5>
           <img height="50" width="50" :src="image" />
           {{ article.title }}
@@ -55,8 +50,6 @@
         <button @click="deleteArticle(article.id)" class="btn btn-danger">Delete</button>
       </div>
     </div>
-
-
   </div>
 </template>
 
@@ -86,7 +79,7 @@ export default {
       pagination: {},
       edit: false,
 
-       oneArticle: false,
+      oneArticle: false,
       hide: false,
       message: "Show Form",
       image:
@@ -97,6 +90,9 @@ export default {
     this.fetchArticles();
   },
   methods: {
+    scrollToTop() {
+      window.scrollTo(0, 0);
+    },
     fetchArticles(page_url) {
       let vm = this;
       vm.image = vm.images[Math.floor(Math.random() * vm.images.length)];
@@ -120,17 +116,13 @@ export default {
       this.pagination = pagination;
     },
     showArticle(id) {
-       this.oneArticle = true;
-      fetch(`api/article/${id}`, {
-
-      })
+      this.oneArticle = true;
+      fetch(`api/article/${id}`, {})
         .then(res => res.json())
-        .then(res=>{
-this.singleArticle = res.data
-        }
-        )
+        .then(res => {
+          this.singleArticle = res.data;
+        })
         .catch(err => console.log(err));
-
     },
     deleteArticle(id) {
       if (confirm("Are You Sure?")) {
@@ -196,6 +188,8 @@ this.singleArticle = res.data
       this.article.body = article.body;
       this.hide = true;
       this.message = "Hide Form";
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     },
     clearForm() {
       this.edit = false;

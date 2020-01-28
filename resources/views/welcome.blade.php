@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="csrf-token" content={{ csrf_token() }}>
 <script>window.laravel={csrfToken:'csrf_token()'}</script>
-        <title>Laravue</title>
+
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -18,7 +18,10 @@
         <!-- Styles -->
 
         <style>
-            
+        col-lg-4{
+            background-clip: padding-box;
+            border: 10px solid transparent;
+        }
             h3{
                 text-align: right;
                 white-space: nowrap;
@@ -37,7 +40,11 @@
 </div>
 
 
-
+<footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+    <div class="container text-center">
+      <small>Laravue</small>
+    </div>
+  </footer>
 </div>
 <script src="{{ asset('js/app.js') }}"></script>
     </body>
